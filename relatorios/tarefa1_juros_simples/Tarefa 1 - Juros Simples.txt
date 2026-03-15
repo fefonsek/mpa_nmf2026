@@ -5,21 +5,50 @@
 ############################################################
 
 QUESTÃO 1
+Um capital de $135.000 transformou-se em $180.000 após 44 
+dias de aplicação. Calcular a taxa de juros obtida na
+operação.
+
 Juros obtidos: R$ 45000
 Tempo em meses: 1.466667
 Taxa mensal: 22.72727 % ao mês
 
+__________________________________________________________
+
 QUESTÃO 2
+Uma pessoa tomou um empréstimo a juros simples de 9% a.a.; 
+45 dias depois, pagou a dívida e contraiu um novo empréstimo
+duas vezes maior que o primeiro, pelo prazo de dez meses a
+juros simples de 6% a.a. Sabendo-se que pagou ao todo
+$111.250 de juros pelos dois empréstimos, calcular o valor
+do primeiro.
+
 Valor do primeiro empréstimo: R$ 1000000
 
+__________________________________________________________
+
 QUESTÃO 3
+Uma pessoa levantou um empréstimo de $3.000 a juros simples 
+de 18% a.a. para ser liquidado daqui a 270 dias. Se a
+pessoa amortizou $1.000 no 75º dia, quanto deverá pagar na 
+data de vencimento de modo a liquidar a dívida? (data 
+focal: 270º dia).
+
 Taxa diária: 0.04931507 % a.d.
 Juros até amortização: R$ 110.9589 
 Saldo após amortização: R$ 2110.959
 Juros período final: R$ 202.9991
 Valor a pagar no vencimento: R$ 2313.958
 
+__________________________________________________________
+
 QUESTÃO 4
+Determinar o rendimento de um capital de $2.000 aplicado 
+desde o dia 3 de março até o dia 28 de junho do corrente 
+ano. A taxa de juros simples inicialmente contratada foi 
+3% a.m., mas posteriormente teve uma queda para 2,8% a.m. 
+no dia 16 de abril e para 2,6% a.m. no dia 16 de junho.
+
 Dias período 1: 44
 Dias período 2: 61
 Dias período 3: 12

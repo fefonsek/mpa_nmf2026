@@ -5,26 +5,60 @@
 ############################################################
 
 QUESTÃO 1
+
+Calcular o montante de um capital de R$ 20.000,00, aplicado
+por um 5 anos, em um investimento que rende 18% a.a, 
+com capitalizações bimestrais.
+
 Capital inicial: R$ 20000 
 Taxa anual: 18 %
 Taxa bimestral: 3 %
 Número de períodos: 30
 Montante final: R$ 48.545,2494 
 
+__________________________________________________________
+
 QUESTÃO 2
+Calcular a taxa efetiva anual, para uma taxa de 60% 
+ao ano, com capitalizações: 
+a) mensais, e 
+b) diárias:
+
 a) Capitalização mensal: 79,5856 % a.a.
 b) Capitalização diária: 82,1221 % a.a.
 
+__________________________________________________________
+
 QUESTÃO 3
+Encontrar a taxa equivalente anual, a partir de
+uma taxa efetiva mensal de 1,56% a.m.
+
 Taxa mensal: 1.56 % a.m.
 Taxa anual equivalente: 20,4127 % a.a.
 
+__________________________________________________________
+
 QUESTÃO 4
+O capital de R$ 100.000,00 foi aplicado em um CDB 
+que rende uma taxa over de 3% a.m.. Pede-se para 
+calcular o montante, ao final de 35 dias úteis.
+
 Montante final da aplicação: R$ 103.560,1598
 Juros obtidos: R$ 3.560,16 
 
+__________________________________________________________
+
 QUESTÃO 5
-Taxa nominal anual (capitalização quadrimestral): 14,3069 % a.a.
+Um investidor teria o mesmo rendimento se aplicasse
+um capital em qualquer uma de duas opções de investimento.
+A primeira opção permite aplicar o capital durante 
+quatro anos à taxa efetiva composta de 15% a.a., e a 
+segunda, durante dois anos a determinada taxa nominal 
+capitalizada quadrimestralmente. Qual é a taxa nominal?
+
+Taxa nominal anual (capitalização 
+quadrimestral): 29,2960 % a.a.
+
 
 
 #############################################################

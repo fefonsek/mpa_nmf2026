@@ -5,21 +5,57 @@
 ############################################################
 
 QUESTÃO 1
+Sabe-se que o desconto racional de um título, cujo valor 
+nominal é R$ 600,00, foi de R$ 57,63. Qual será a taxa 
+de juros considerada, se o prazo de antecipação foi 
+cinco meses?
+
 Taxa de juros considerada: 25,5014 % ao ano
 
+__________________________________________________________
+
 QUESTÃO 2
+Qual o desconto comercial para um título de valor nominal 
+de R$ 2.200,00 com uma antecipação de 40 dias, se a 
+taxa de descontos usada for de 90% a.a.?
+
 Desconto comercial: R$ 220,00
 Valor líquido recebido: R$ 1980,00
 
+__________________________________________________________
+
 QUESTÃO 3
+O desconto “por fora” de um certo título foi de R$ 700,00.
+A taxa de descontos usada na operação foi de 4% a.m. por
+42 dias. Qual o valor do título no vencimento?
+
 Valor do título no vencimento: R$ 12.500,00
 
+__________________________________________________________
+
 QUESTÃO 4
+Um banco propõe a um cliente duas alternativas de
+empréstimo com base em desconto comercial: a) 5,5% am e 
+prazo de quatro meses; e b) 6% a.m. com prazo de dois
+meses. Qual das alternativas é mais vantajosa para o 
+cliente?
+
 Desconto proporcional alternativa A: 22 %
 Desconto proporcional alternativa B: 12 %
 A alternativa B é mais economica para o cliente.
 
+__________________________________________________________
+
 QUESTÃO 5
+A loja de confecções “Malha Fina” tem em seu caixa um 
+cheque pré-datado no valor de R$ 1.250,00 para segurar 
+por mais 12 dias. Ao fazer uma consulta a um banco 
+comercial sobre a possibilidade de efetuar um desconto, 
+obteve o seguinte parecer:- taxas de descontos comercial:
+4,5% a.m;- taxa do IOF: 0,0328% a.d.;- taxas operacionais:
+R$ 2,58 pela operação de desconto. Qual o valor que o
+comerciante pode esperar receber pelo cheque?
+
 Valor líquido recebido: R$ 1.220,00
 
 

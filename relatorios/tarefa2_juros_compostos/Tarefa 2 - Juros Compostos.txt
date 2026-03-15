@@ -5,18 +5,41 @@
 ############################################################
 
 QUESTÃO 1
+Hoje você pegou emprestado em um banco a quantia de 
+R$ 50.000,00, para ser pago ao final de 5 anos, à taxa juros 
+de 1,5% a.m. Pede-se para determinar o valor que deverá ser
+pago ao final do prazo da operação financeira.
+
 Capital inicial: R$ 50000
 Taxa de juros: 1.5 % a.m.
 Número de períodos: 60 meses
 Montante final a pagar: R$ 122.160,9888
 
+__________________________________________________________
+
 QUESTÃO 2
+O valor a vista de um equipamento é R$ 5.000,00, no entanto, 
+caso o cliente decida comprar a prazo, com duas parcelas
+iguais, em 30 e 60 dias, a taxa de juros cobrada será de
+2,5% a.m. Deste modo, pede-se calcular o valor das parcelas,
+no caso da compra a prazo.
+
 Valor à vista: R$ 5000
 Taxa de juros: 2.5 % a.m.
 Parcelas em 30 e 60 dias
 Valor de cada parcela: R$ 2.594,1358
 
+__________________________________________________________
+
 QUESTÃO 3
+Determinar o tempo que um capital leva para ser triplicado,
+considerando uma taxa de 7% ao ano, em regime composto 
+de capitalização.
+
+Calcular o tempo exato e aproximado. Demonstrar os
+cálculos usando a calculadora financeira. Utilizar
+4 casas decimais
+
 Equação: 3 = (1.07)^n
 n = ln(3)/ln(1.07)
 Tempo exato para triplicar o capital: 16,2376 anos
@@ -28,7 +51,19 @@ Taxa:  7 % ao ano
 Tempo:  16.23757  anos
 Simulação resulta em um montade de: R$ 300,0300
 
+__________________________________________________________
+
 QUESTÃO 4
+Você deve $180.000,00 a um banco, cujo valor irá vencer 
+em 3 meses. Caso você deseja negociar a troca desta dívida
+por dois pagamentos iguais, acontecendo nos meses 5 e 6, e
+admitindo a taxa de juros de 3,6% ao mês, pede-se calcular 
+o valor dos pagamentos. Considere capitalização composta
+na sua resolução.
+
+Demonstrar os cálculos usando a calculadora financeira.
+Utilizar 4 casas decimais.
+
 Valor de cada pagamento:
 R$ 98.304,6356
 

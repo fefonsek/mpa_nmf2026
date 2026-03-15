@@ -129,8 +129,8 @@ cat("Juros obtidos: R$", juros_fmt, "\n")
 # taxa efetiva anual
 i1 <- 0.15
 
-# prazo equivalente considerado na prova
-n1 <- 2
+# prazo equivalente considerado
+n1 <- 4
 
 # montante relativo
 M1 <- (1 + i1)^n1
