@@ -1,0 +1,198 @@
+############################################################
+# DISCIPLINA: NIVELAMENTO EM MATEMÁTICA FINANCEIRA
+# Autor: Felipe Fonseca
+# Objetivo: apresentar a memória de cálculo em R
+############################################################
+
+QUESTÃO 1
+Juros obtidos: R$ 45000
+Tempo em meses: 1.466667
+Taxa mensal: 22.72727 % ao mês
+
+QUESTÃO 2
+Valor do primeiro empréstimo: R$ 1000000
+
+QUESTÃO 3
+Taxa diária: 0.04931507 % a.d.
+Juros até amortização: R$ 110.9589 
+Saldo após amortização: R$ 2110.959
+Juros período final: R$ 202.9991
+Valor a pagar no vencimento: R$ 2313.958
+
+QUESTÃO 4
+Dias período 1: 44
+Dias período 2: 61
+Dias período 3: 12
+
+Juros período 1: R$ 88
+Juros período 2: R$ 113.8667
+Juros período 3: R$ 20.8
+
+Rendimento total: R$ 222.6667
+
+
+#############################################################
+# CÓDIGO
+#############################################################
+
+############################
+# QUESTÃO 1
+############################
+
+# Um capital de 135.000 virou 180.000 após 44 dias
+
+C <- 135000
+M <- 180000
+dias <- 44
+
+# Conversão de dias para meses (mês comercial = 30 dias)
+t <- dias / 30
+
+# Juros obtidos
+J <- M - C
+
+# taxa mensal de juros simples
+i_mes <- J / (C * t)
+
+# taxa em porcentagem
+i_mes_percent <- i_mes * 100
+
+cat("QUESTÃO 1\n")
+cat("Juros obtidos: R$", J, "\n")
+cat("Tempo em meses:", t, "\n")
+cat("Taxa mensal:", i_mes_percent, "% ao mês\n\n")
+
+############################
+# QUESTÃO 2
+############################
+
+# Seja C o valor do primeiro empréstimo
+
+# Primeiro empréstimo
+i1 <- 0.09        # taxa anual
+i1 <- i1 / 12     # converter para taxa mensal
+
+t1 <- 45 / 30     # 45 dias = 1,5 meses
+
+# Segundo empréstimo
+i2 <- 0.06
+i2 <- i2 / 12     # taxa mensal
+
+t2 <- 10          # já está em meses
+
+# juros totais pagos
+J_total <- 111250
+
+# Equação dos juros
+# J1 + J2 = 111250
+# C*i1*t1 + (2C)*i2*t2 = 111250
+
+C <- J_total / (i1*t1 + 2*i2*t2)
+
+cat("QUESTÃO 2\n")
+cat("Valor do primeiro empréstimo: R$", format(round(C,2), scientific = FALSE), "\n\n")
+
+############################
+# QUESTÃO 3
+############################
+
+# Empréstimo inicial
+C <- 3000
+
+# taxa anual
+i_ano <- 0.18
+
+# converter para taxa diária
+i <- i_ano / 365
+
+# tempo total em dias
+t_total <- 270
+
+# amortização
+amortizacao <- 1000
+
+# tempo até amortização
+t1 <- 75
+
+# juros até amortização
+J1 <- C * i * t1
+
+# saldo após amortização
+saldo <- C + J1 - amortizacao
+
+# tempo restante
+t2 <- 270 - 75
+
+# juros do saldo restante
+J2 <- saldo * i * t2
+
+# valor final
+pagamento_final <- saldo + J2
+
+cat("QUESTÃO 3\n")
+cat("Taxa diária:", i*100, "% a.d.\n")
+cat("Juros até amortização: R$", J1, "\n")
+cat("Saldo após amortização: R$", saldo, "\n")
+cat("Juros período final: R$", J2, "\n")
+cat("Valor a pagar no vencimento: R$", pagamento_final, "\n\n")
+
+############################
+# QUESTÃO 4
+############################
+
+# capital inicial
+C <- 2000
+
+# taxas mensais
+i1_mes <- 0.03
+i2_mes <- 0.028
+i3_mes <- 0.026
+
+# converter para taxa diária (% a.d.)
+i1 <- i1_mes / 30
+i2 <- i2_mes / 30
+i3 <- i3_mes / 30
+
+
+############################
+# CONTAGEM DE DIAS (com fórmulas)
+############################
+
+# 3 mar até 16 abr
+# março: (31 - 3) + abril: 16
+t1 <- (31 - 3) + 16
+
+# 16 abr até 16 jun
+# abril: (30 - 16) + maio: 31 + junho: 16
+t2 <- (30 - 16) + 31 + 16
+
+# 16 jun até 28 jun
+t3 <- 28 - 16
+
+
+############################
+# JUROS EM CADA PERÍODO
+############################
+
+J1 <- C * i1 * t1
+J2 <- C * i2 * t2
+J3 <- C * i3 * t3
+
+# rendimento total
+J_total <- J1 + J2 + J3
+
+
+############################
+# RESULTADOS
+############################
+
+cat("QUESTÃO 4\n")
+cat("Dias período 1:", t1, "\n")
+cat("Dias período 2:", t2, "\n")
+cat("Dias período 3:", t3, "\n\n")
+
+cat("Juros período 1: R$", J1, "\n")
+cat("Juros período 2: R$", J2, "\n")
+cat("Juros período 3: R$", J3, "\n\n")
+
+cat("Rendimento total: R$", J_total, "\n")

@@ -1,0 +1,150 @@
+############################
+# QUESTÃO 1
+############################
+
+# capital inicial
+C <- 20000
+
+# taxa anual
+i_ano <- 0.18
+
+# capitalização bimestral (6 períodos por ano)
+i <- i_ano / 6
+
+# tempo
+anos <- 5
+n <- anos * 6
+
+# cálculo do montante
+M <- C * (1 + i)^n
+
+# formatar com 4 casas decimais
+M_fmt <- formatC(M, format="f", digits=4, decimal.mark=",", big.mark=".")
+
+cat("QUESTÃO 1\n")
+
+cat("Capital inicial: R$", C, "\n")
+cat("Taxa anual:", i_ano*100, "%\n")
+cat("Taxa bimestral:", i*100, "%\n")
+cat("Número de períodos:", n, "\n")
+
+cat("Montante final: R$", M_fmt, "\n\n")
+
+############################
+# QUESTÃO 2
+############################
+
+# taxa nominal anual
+i_nom <- 0.60
+
+############################
+# a) capitalização mensal
+############################
+
+m_mensal <- 12
+
+tea_mensal <- (1 + i_nom/m_mensal)^m_mensal - 1
+
+############################
+# b) capitalização diária
+############################
+
+m_diario <- 365
+
+tea_diaria <- (1 + i_nom/m_diario)^m_diario - 1
+
+# formatar resultados
+tea_mensal_fmt <- formatC(tea_mensal*100, format="f", digits=4, decimal.mark=",")
+tea_diaria_fmt <- formatC(tea_diaria*100, format="f", digits=4, decimal.mark=",")
+
+cat("QUESTÃO 2\n")
+
+cat("a) Capitalização mensal: ")
+cat(tea_mensal_fmt, "% a.a.\n")
+
+cat("b) Capitalização diária: ")
+cat(tea_diaria_fmt, "% a.a.\n\n")
+
+############################
+# QUESTÃO 3
+############################
+
+# taxa efetiva mensal
+i_mensal <- 0.0156
+
+# número de períodos no ano
+n <- 12
+
+# cálculo da taxa anual equivalente
+i_anual <- (1 + i_mensal)^n - 1
+
+# formatar resultado com 4 casas decimais
+i_anual_fmt <- formatC(i_anual*100, format="f", digits=4, decimal.mark=",")
+
+cat("QUESTÃO 3\n")
+cat("Taxa mensal:", i_mensal*100, "% a.m.\n")
+cat("Taxa anual equivalente: ")
+cat(i_anual_fmt, "% a.a.\n\n")
+
+############################
+# QUESTÃO 4
+############################
+
+# capital inicial
+C <- 100000
+
+# taxa mensal
+i_mes <- 0.03
+
+# dias úteis considerados
+dias_mes <- 30
+
+# prazo da aplicação
+dias_aplicacao <- 35
+
+# taxa diária equivalente
+i_dia <- (1 + i_mes)^(1/dias_mes) - 1
+
+# simular arredondamento da HP12C
+i_dia <- round(i_dia, 4)
+
+# montante
+M <- C * (1 + i_dia)^dias_aplicacao
+
+# cálculo dos juros
+juros <- M - C
+
+# formatar resultado
+M_fmt <- formatC(M, format="f", digits=4, decimal.mark=",", big.mark=".")
+juros_fmt <- formatC(juros, format="f", digits=2, decimal.mark=",", big.mark=".")
+
+cat("QUESTÃO 4\n")
+cat("Montante final da aplicação: R$", M_fmt, "\n")
+cat("Juros obtidos: R$", juros_fmt, "\n")
+
+############################
+# QUESTÃO 5
+############################
+
+# taxa efetiva anual
+i1 <- 0.15
+
+# prazo equivalente considerado na prova
+n1 <- 2
+
+# montante relativo
+M1 <- (1 + i1)^n1
+
+# número de quadrimestres em 2 anos
+periodos <- 6
+
+# taxa por quadrimestre
+iq <- M1^(1/periodos) - 1
+
+# taxa nominal anual
+ia <- iq * 3
+
+ia_fmt <- formatC(ia*100, format="f", digits=4, decimal.mark=",")
+
+cat("QUESTÃO 5\n")
+cat("Taxa nominal anual (capitalização quadrimestral):", ia_fmt, "% a.a.\n")

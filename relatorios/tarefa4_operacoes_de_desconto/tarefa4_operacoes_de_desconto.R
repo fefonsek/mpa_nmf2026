@@ -1,0 +1,137 @@
+############################
+# QUESTÃO 1
+############################
+
+# valor nominal do título
+N <- 600
+
+# desconto racional
+Dr <- 57.63
+
+# prazo em anos
+t <- 5/12
+
+# cálculo da taxa anual
+i <- Dr / (t * (N - Dr))
+
+# formatar resultado
+i_fmt <- formatC(i*100, format="f", digits=4, decimal.mark=",")
+
+cat("QUESTÃO 1\n")
+cat("Taxa de juros considerada: ")
+cat(i_fmt, "% ao ano\n\n")
+
+############################
+# QUESTÃO 2
+############################
+
+# valor nominal
+N <- 2200
+
+# taxa de desconto anual
+d <- 0.90
+
+# prazo em anos (ano comercial)
+t <- 40/360
+
+# cálculo do desconto
+D <- N * d * t
+
+# valor líquido recebido
+VL <- N - D
+
+# formatar resultados
+D_fmt <- formatC(D, format="f", digits=2, decimal.mark=",")
+VL_fmt <- formatC(VL, format="f", digits=2, decimal.mark=",")
+
+cat("QUESTÃO 2\n")
+cat("Desconto comercial: ")
+cat("R$", D_fmt, "\n")
+
+cat("Valor líquido recebido: ")
+cat("R$", VL_fmt, "\n\n")
+
+############################
+# QUESTÃO 3
+############################
+
+# desconto conhecido
+D <- 700
+
+# taxa mensal
+d <- 0.04
+
+# prazo em meses (mês comercial)
+t <- 42/30
+
+# cálculo do valor nominal
+N <- D / (d * t)
+
+# formatar resultado
+N_fmt <- formatC(N, format="f", digits=2, decimal.mark=",", big.mark=".")
+
+cat("QUESTÃO 3\n")
+cat("Valor do título no vencimento: ")
+cat("R$", N_fmt, "\n\n")
+
+############################
+# QUESTÃO 4
+############################
+
+# taxas
+d1 <- 0.055
+d2 <- 0.06
+
+# prazos em meses
+t1 <- 4
+t2 <- 2
+
+# descontos proporcionais
+D1 <- d1 * t1
+D2 <- d2 * t2
+
+cat("QUESTÃO 4\n")
+
+cat("Desconto proporcional alternativa A:", D1*100, "%\n")
+cat("Desconto proporcional alternativa B:", D2*100, "%\n")
+
+if(D1 < D2){
+  cat("A alternativa A é mais economica para o cliente.\n\n")
+} else {
+  cat("A alternativa B é mais economica para o cliente.\n\n")
+}
+  
+############################
+# QUESTÃO 5
+############################
+
+# valor do cheque
+N <- 1250
+
+# taxa de desconto mensal
+d <- 0.045
+
+# prazo em meses
+t <- 12/30
+
+# desconto comercial
+D <- N * d * t
+
+# IOF diário
+iof_d <- 0.000328
+
+# cálculo do IOF
+IOF <- N * iof_d * 12
+
+# taxa operacional
+taxa <- 2.58
+
+# valor líquido recebido
+VL <- N - D - IOF - taxa
+
+# formatar resultado
+VL_fmt <- formatC(VL, format="f", digits=2, decimal.mark=",", big.mark=".")
+
+cat("QUESTÃO 5\n")
+cat("Valor líquido recebido: ")
+cat("R$", VL_fmt, "\n")

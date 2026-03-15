@@ -1,0 +1,162 @@
+############################################################
+# DISCIPLINA: NIVELAMENTO EM MATEMÁTICA FINANCEIRA
+# Autor: Felipe Fonseca
+# Objetivo: apresentar a memória de cálculo em R
+############################################################
+
+QUESTÃO 1
+Capital inicial: R$ 50000
+Taxa de juros: 1.5 % a.m.
+Número de períodos: 60 meses
+Montante final a pagar: R$ 122.160,9888
+
+QUESTÃO 2
+Valor à vista: R$ 5000
+Taxa de juros: 2.5 % a.m.
+Parcelas em 30 e 60 dias
+Valor de cada parcela: R$ 2.594,1358
+
+QUESTÃO 3
+Equação: 3 = (1.07)^n
+n = ln(3)/ln(1.07)
+Tempo exato para triplicar o capital: 16,2376 anos
+Tempo aproximado: 16,0000 anos
+
+SIMULAÇÃO:
+Valor inicial: R$ 100,0100
+Taxa:  7 % ao ano
+Tempo:  16.23757  anos
+Simulação resulta em um montade de: R$ 300,0300
+
+QUESTÃO 4
+Valor de cada pagamento:
+R$ 98.304,6356
+
+
+#############################################################
+# CÓDIGO
+#############################################################
+
+############################
+# QUESTÃO 1
+############################
+
+# Um capital de 50000 foi pego para ser pago em 5 anos
+C = 50000
+
+# taxa de juros compostos
+i <- 0.015   # 1,5% ao mês
+
+# tempo
+anos <- 5
+n <- anos * 12   # converter para meses
+
+# cálculo do montante
+M <- C * (1 + i)^n
+
+# resultado com 4 casas decimais
+M_formatado <- formatC(M, format="f", digits=4, big.mark=".", decimal.mark=",")
+
+cat("QUESTÃO 1\n")
+cat("Capital inicial: R$", C, "\n")
+cat("Taxa de juros:", i*100, "% a.m.\n")
+cat("Número de períodos:", n, "meses\n")
+
+cat("Montante final a pagar: R$", M_formatado, "\n\n")
+
+############################
+# QUESTÃO 2
+############################
+
+# valor à vista
+PV <- 5000
+
+# taxa de juros
+i <- 0.025  # 2,5% a.m.
+
+# períodos
+n1 <- 1   # 30 dias
+n2 <- 2   # 60 dias
+
+# cálculo do valor das parcelas
+X <- PV / (1/(1+i)^n1 + 1/(1+i)^n2)
+
+# formatar com 4 casas decimais
+X_formatado <- formatC(X, format="f", digits=4, big.mark=".", decimal.mark=",")
+
+cat("QUESTÃO 2\n")
+cat("Valor à vista: R$", PV, "\n")
+cat("Taxa de juros:", i*100, "% a.m.\n")
+cat("Parcelas em 30 e 60 dias\n")
+
+cat("Valor de cada parcela: R$", X_formatado, "\n\n")
+
+############################
+# QUESTÃO 3
+############################
+
+# taxa de juros anual
+i <- 0.07
+
+# relação entre montante e capital
+relacao <- 3   # capital triplica
+
+# tempo exato usando logaritmo
+n_exato <- log(relacao) / log(1 + i)
+
+# tempo aproximado (regra prática 72)
+n_aprox <- round(n_exato)
+
+# formatar resultados
+n_exato_fmt <- formatC(n_exato, format="f", digits=4, decimal.mark=",")
+n_aprox_fmt <- formatC(n_aprox, format="f", digits=4, decimal.mark=",")
+
+cat("QUESTÃO 3\n")
+
+cat("Equação: 3 = (1.07)^n\n")
+cat("n = ln(3)/ln(1.07)\n")
+cat("Tempo exato para triplicar o capital: ")
+cat(n_exato_fmt, "anos\n")
+
+cat("Tempo aproximado: ")
+cat(n_aprox_fmt, "anos\n\n")
+
+n = n_exato
+C = 100.01
+M <- C * (1 + i)^n
+cat("SIMULAÇÃO:\n")
+cat("Valor inicial: R$", formatC(C, format="f", digits=4, decimal.mark=","), "\n")
+cat("Taxa: ", i*100, "% ao ano\n")
+cat("Tempo: ", n, " anos\n")
+cat("Simulação resulta em um montade de: R$", formatC(M, format="f", digits=4, decimal.mark=","), "\n\n")
+
+############################
+# QUESTÃO 4
+############################
+
+# valor da dívida atual
+divida <- 180000
+
+# taxa de juros composta mensal
+i <- 0.036
+
+# diferença de tempo até os pagamentos
+t1 <- 2   # mês 3 até mês 5
+t2 <- 3   # mês 3 até mês 6
+
+# cálculo dos fatores de desconto
+fator1 <- 1 / (1 + i)^t1
+fator2 <- 1 / (1 + i)^t2
+
+# resolução da equação financeira
+# 180000 = X*fator1 + X*fator2
+# X = 180000 / (fator1 + fator2)
+
+X <- divida / (fator1 + fator2)
+
+# resultado com 4 casas decimais
+X_fmt <- formatC(X, format="f", digits=4, decimal.mark=",", big.mark=".")
+
+cat("QUESTÃO 4\n")
+cat("Valor de cada pagamento:\n")
+cat("R$", X_fmt, "\n")
