@@ -1,0 +1,174 @@
+############################################################
+# DISCIPLINA: NIVELAMENTO EM MATEMÁTICA FINANCEIRA
+# Autor: Felipe Fonseca
+# Objetivo: apresentar a memória de cálculo em R
+############################################################
+
+QUESTÃO 1
+Uma equipamento é vendido em 36 prestações mensais de $102,59.
+A juros efetivos de 6%a.m, qual deveria ser o seu valor a 
+vista? Considere que as prestações começam 30 dias após a 
+compra do equipamento.
+
+Valor à vista: R$ 1499,9671
+
+__________________________________________________________
+
+QUESTÃO 2
+Por um equipamento cujo valor à vista é de $50.000 paga-se 
+uma entrada de 20%, mais 18 prestações mensais, que começam 
+30 dias após a compra. A juros efetivos de 3%a.m., determinar 
+o valor das prestações.
+
+Valor das prestações: R$ 2908,3478
+
+__________________________________________________________
+
+QUESTÃO 3
+Desejando obter $100.000 dentro de 48 meses, uma pessoa 
+começou a aplicar mensalmente uma determinada quantia constante 
+a juros efetivos de 1,0% a.m. Qual deve ser o valor de cada 
+aplicação, de modo que ela consiga acumular o capital na data 
+do último depósito?
+
+Valor da aplicação mensal: R$ 1633,3835
+
+__________________________________________________________
+
+QUESTÃO 4
+Seu amigo lhe emprestou R$ 20.000,00 hoje, e você combinou de 
+pagá-lo da seguinte forma: R$ 6.000,00 após 12 meses; 
+R$ 8.000,00 após 24 meses; e R$ 10.000,00 após 36 meses. 
+Pede-se para calcular a taxa de juros efetivas anual e mensal 
+que está sendo praticada na operação.
+
+Taxa mensal: 0,7127 % a.m.
+Taxa anual efetiva: 8,8959 % a.a.
+
+__________________________________________________________
+
+QUESTÃO 5
+Um agricultor pegou um empréstimo de R$ 25.000,00 para ser 
+pago em 5 parcelas mensais, as quais vão começar imediatamente 
+após 24 meses da data do empréstimo. Considerando que a taxa de 
+juros contratada foi de 0,75% ao mês, pede-se calcular o valor 
+das parcelas.
+
+Valor das parcelas: R$ 6117,3346 
+
+
+
+#############################################################
+# CÓDIGO
+#############################################################
+
+############################
+# QUESTÃO 1
+############################
+
+
+# dados
+PMT <- 102.59   # prestação
+i <- 0.06       # taxa mensal
+n <- 36         # número de parcelas
+
+# valor presente (preço à vista)
+VP <- PMT * (1 - (1 + i)^(-n)) / i
+
+# formatar
+VP_fmt <- formatC(VP, format="f", digits=4, decimal.mark=",")
+
+cat("QUESTÃO 1\n")
+cat("Valor à vista: R$", VP_fmt, "\n")
+
+
+############################
+# QUESTÃO 2
+############################
+
+# dados
+PV_total <- 50000
+entrada <- 0.20 * PV_total
+VP <- PV_total - entrada
+
+i <- 0.03   # taxa mensal
+n <- 18     # número de parcelas
+
+# cálculo da prestação
+PMT <- VP * (i / (1 - (1 + i)^(-n)))
+
+# formatar
+PMT_fmt <- formatC(PMT, format="f", digits=4, decimal.mark=",")
+
+cat("QUESTÃO 2\n")
+cat("Valor das prestações: R$", PMT_fmt, "\n")
+
+
+############################
+# QUESTÃO 3
+############################
+
+# dados
+FV <- 100000   # valor futuro desejado
+i <- 0.01      # taxa mensal
+n <- 48        # número de períodos
+
+# cálculo do valor da aplicação mensal
+PMT <- FV * (i / ((1 + i)^n - 1))
+
+# formatar
+PMT_fmt <- formatC(PMT, format="f", digits=4, decimal.mark=",")
+
+cat("QUESTÃO 3\n")
+cat("Valor da aplicação mensal: R$", PMT_fmt, "\n")
+
+
+############################
+# QUESTÃO 4
+############################
+
+# fluxo de caixa
+VP <- 20000
+
+f <- function(i) {
+  6000 / (1 + i)^12 +
+    8000 / (1 + i)^24 +
+    10000 / (1 + i)^36 - VP
+}
+
+# encontrar a taxa mensal (i)
+taxa_mensal <- uniroot(f, interval = c(0, 0.1))$root
+
+# converter para taxa anual efetiva
+taxa_anual <- (1 + taxa_mensal)^12 - 1
+
+# formatar
+tm_fmt <- formatC(taxa_mensal*100, format="f", digits=4, decimal.mark=",")
+ta_fmt <- formatC(taxa_anual*100, format="f", digits=4, decimal.mark=",")
+
+cat("QUESTÃO 4\n")
+cat("Taxa mensal:", tm_fmt, "% a.m.\n")
+cat("Taxa anual efetiva:", ta_fmt, "% a.a.\n")
+
+
+############################
+# QUESTÃO 5
+############################
+
+# dados
+VP <- 25000
+i <- 0.0075   # 0,75% a.m.
+n <- 5        # parcelas
+carencia <- 24
+
+# levar o valor para o tempo 24
+FV24 <- VP * (1 + i)^carencia
+
+# calcular as parcelas
+PMT <- FV24 * (i / (1 - (1 + i)^(-n)))
+
+# formatar
+PMT_fmt <- formatC(PMT, format="f", digits=4, decimal.mark=",")
+
+cat("QUESTÃO 5\n")
+cat("Valor das parcelas: R$", PMT_fmt, "\n")
