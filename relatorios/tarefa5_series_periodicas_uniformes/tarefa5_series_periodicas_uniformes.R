@@ -100,7 +100,7 @@ carencia <- 24
 FV24 <- VP * (1 + i)^carencia
 
 # calcular as parcelas
-PMT <- FV24 * (i / (1 - (1 + i)^(-n)))
+PMT <- FV24 * (i / (1 - (1 + i)^(-n))) / (1 + i)
 
 # formatar
 PMT_fmt <- formatC(PMT, format="f", digits=4, decimal.mark=",")

@@ -1,0 +1,200 @@
+
+# QUESTÃO 1 ---------------------------------------------------------------
+
+# Dividendos por ação
+D <- 0.60
+
+# Taxa de retorno exigida
+r <- 0.20
+
+# Taxa de crescimento
+g <- 0.05
+
+# -------------------------
+# 1) Sem crescimento
+# -------------------------
+P_sem_crescimento <- D / r
+
+# -------------------------
+# 2) Com crescimento (Gordon)
+# -------------------------
+P_com_crescimento <- D / (r - g)
+
+# -------------------------
+# Formatação
+# -------------------------
+P1_fmt <- formatC(P_sem_crescimento, format="f", digits=2, decimal.mark=",")
+P2_fmt <- formatC(P_com_crescimento, format="f", digits=2, decimal.mark=",")
+
+cat("QUESTÃO 1\n\n")
+
+cat("Preço da ação sem crescimento: R$", P1_fmt, "\n")
+cat("Preço da ação com crescimento: R$", P2_fmt, "\n")
+
+
+# QUESTÃO 2 ---------------------------------------------------------------
+
+# fluxos de caixa
+fluxos <- c(200, 400, 800, 1600, 3200)
+
+# taxa de desconto (5% a.m.)
+i <- 0.05
+
+# períodos
+t <- 1:length(fluxos)
+
+# cálculo do valor presente
+VP <- sum(fluxos / (1 + i)^t)
+
+# formatação
+VP_fmt <- formatC(VP, format="f", digits=2, decimal.mark=",", big.mark=".")
+
+cat("QUESTÃO 2\n\n")
+
+cat("Valor máximo do investimento: R$", VP_fmt, "\n")
+
+
+# QUESTÃO 3 ---------------------------------------------------------------
+
+# dividendo inicial
+D1 <- 2
+
+# taxa de crescimento (dobra = 100%)
+g <- 1
+
+# número de períodos
+n <- 5
+
+# taxa de desconto
+r <- 0.15
+
+# gerar dividendos
+t <- 1:n
+dividendos <- D1 * (1 + g)^(t - 1)
+
+# calcular valor presente
+P <- sum(dividendos / (1 + r)^t)
+
+# formatação
+P_fmt <- formatC(P, format="f", digits=2, decimal.mark=",", big.mark=".")
+
+cat("QUESTÃO 3\n\n")
+
+cat("Valor da ação: R$", P_fmt, "\n")
+
+
+# QUESTÃO 4 ---------------------------------------------------------------
+
+options(digits = 10)
+
+# -------------------------
+# 1) Taxa de juros
+# -------------------------
+i_aa <- 0.18
+i_m <- (1 + i_aa)^(1/12) - 1
+
+# -------------------------
+# 2) Opção 1 - À vista
+# -------------------------
+VP1 <- 131761.80
+
+# -------------------------
+# 3) Opção 2 - Parcelas decrescentes
+# -------------------------
+parcelas <- seq(from = 20000, by = -1500, length.out = 12)
+t <- seq_along(parcelas)
+
+VP2 <- sum(parcelas / (1 + i_m)^t)
+
+# -------------------------
+# 4) Opção 3 - Pagamento único
+# -------------------------
+VP3 <- 150000 / (1 + i_m)^12
+
+# -------------------------
+# 5) Comparação com precisão
+# -------------------------
+VPs <- c(VP1, VP2, VP3)
+nomes <- c("À vista", "Parcelas decrescentes", "Pagamento único final")
+
+melhor_opcao <- nomes[which.min(VPs)]
+
+# Diferenças (para diagnóstico)
+dif_12 <- VP2 - VP1
+dif_13 <- VP3 - VP1
+
+# -------------------------
+# 6) Formatação
+# -------------------------
+fmt <- function(x) formatC(x, format="f", digits=10, decimal.mark=",", big.mark=".")
+
+# -------------------------
+# 7) Saída
+# -------------------------
+cat("QUESTÃO 4\n\n")
+
+cat("Valores Presentes:\n")
+cat("1) À vista: R$", fmt(VP1), "\n")
+cat("2) Parcelas: R$", fmt(VP2),  "\n")
+cat("3) Pagamento final: R$", fmt(VP3), "\n\n")
+
+cat("Diferença (Parcelas - À vista):", dif_12, "\n")
+cat("Diferença (Final - À vista):", dif_13, "\n\n")
+
+cat("Opção mais vantajosa:", melhor_opcao, "\n")
+
+
+# QUESTÃO 5 ---------------------------------------------------------------
+
+# taxa de desconto
+i <- 0.05
+
+# -------------------------
+# Opção 1 - Madeira
+# -------------------------
+custo_inicial_madeira <- 10000
+manutencao_madeira <- 2000
+periodo_madeira <- 3
+
+# VP da manutenção (perpetuidade a cada 3 anos)
+VP_manut_madeira <- manutencao_madeira / ((1 + i)^periodo_madeira - 1)
+
+# VP total
+VP_madeira <- custo_inicial_madeira + VP_manut_madeira
+
+# -------------------------
+# Opção 2 - Aço
+# -------------------------
+custo_inicial_aco <- 16000
+manutencao_aco <- 1000
+periodo_aco <- 6
+
+# VP da manutenção (perpetuidade a cada 6 anos)
+VP_manut_aco <- manutencao_aco / ((1 + i)^periodo_aco - 1)
+
+# VP total
+VP_aco <- custo_inicial_aco + VP_manut_aco
+
+# -------------------------
+# Comparação
+# -------------------------
+VPs <- c(VP_madeira, VP_aco)
+nomes <- c("Madeira", "Aço")
+
+melhor_opcao <- nomes[which.min(VPs)]
+
+# -------------------------
+# Formatação
+# -------------------------
+fmt <- function(x) formatC(x, format="f", digits=2, decimal.mark=",", big.mark=".")
+
+# -------------------------
+# Saída
+# -------------------------
+cat("QUESTÃO 5\n\n")
+
+cat("Valor Presente dos custos:\n")
+cat("Madeira: R$", fmt(VP_madeira), "\n")
+cat("Aço: R$", fmt(VP_aco), "\n\n")
+
+cat("Alternativa mais econômica:", melhor_opcao, "\n")

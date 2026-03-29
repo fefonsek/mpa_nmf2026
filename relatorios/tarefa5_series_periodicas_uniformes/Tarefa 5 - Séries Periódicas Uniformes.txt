@@ -54,7 +54,7 @@ após 24 meses da data do empréstimo. Considerando que a taxa de
 juros contratada foi de 0,75% ao mês, pede-se calcular o valor 
 das parcelas.
 
-Valor das parcelas: R$ 6117,3346 
+Valor das parcelas: R$ 6071,7962
 
 
 
@@ -165,7 +165,7 @@ carencia <- 24
 FV24 <- VP * (1 + i)^carencia
 
 # calcular as parcelas
-PMT <- FV24 * (i / (1 - (1 + i)^(-n)))
+PMT <- FV24 * (i / (1 - (1 + i)^(-n))) / (1 + i)
 
 # formatar
 PMT_fmt <- formatC(PMT, format="f", digits=4, decimal.mark=",")
