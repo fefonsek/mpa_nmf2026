@@ -1,0 +1,175 @@
+############################################################
+# DISCIPLINA: NIVELAMENTO EM MATEMÁTICA FINANCEIRA
+# Autor: Felipe Fonseca
+# Objetivo: apresentar a memória de cálculo em R
+############################################################
+
+QUESTÃO 1
+Determinar a taxa contínua (instantânea) ao ano equivalente 
+à taxa efetiva de 
+
+A) 20% a.a., e 
+B) 12% a.a.
+
+Taxa contínua equivalente:
+A) 20% a.a.: 18,2322 % a.a.
+B) 12% a.a.: 11,3329 % a.a.
+
+__________________________________________________________
+
+QUESTÃO 2
+Calcular o montante de um capital de R$ 1.000,00, aplicado 
+durante 2 anos, a uma taxa contínua de 15% a.a.
+
+Montante final: R$ 1.349,8588 
+
+__________________________________________________________
+
+QUESTÃO 3
+Uma ação teve as seguintes variações de preços: 02/jan 
+R$ 10,00; 02/fev R$ 10,50; 02/mar = R$ 10,00. Pede-se 
+calcular o retorno da ação pelo regime contínuo no prazo 
+mencionado. (considerar 3 casas decimais após a vírgula)
+
+Jan -> Fev: 4,879
+Fev -> Mar: -4,879 
+
+__________________________________________________________
+
+QUESTÃO 4
+A construção de um imóvel levará 2 anos para ser concluída,
+e neste tempo estima-se que o investimento será de 
+R$ 500,000,00. Considerando-se que a taxa de juros efetiva 
+e discreta seja de 10% a.a., pede-se para encontrar o valor 
+presente do investimento, assumindo que os gastos sejam 
+uniformemente distribuídos ao longo do período.
+
+Valor presente do investimento: R$ 455.233,95
+
+__________________________________________________________
+
+QUESTÃO 5
+Uma cantina foi selecionada em uma licitação pública para 
+realizar suas operações comerciais. O dono da cantina estima 
+que o negócio irá gerar fluxos de caixa anuais de 
+R$120.000,00/ano, ao longo de 10 anos, tempo que vence o seu 
+contrato. Assumindo que o investimento inicial da empresa, 
+em equipamentos e capital de giro seja de R$1.000.000,00. 
+Pede-se calcular o VPL, considerando uma taxa de juros 
+de 20% a.a. e que as receitas são realizadas em regime de 
+fluxo uniforme e contínua. (Obs. considerar como nulo o 
+valor do investimento no final do contrato)
+
+Valor Presente dos fluxos: R$ 551.878,41 
+VPL do projeto: R$ -448.121,59 
+
+
+
+#############################################################
+# CÓDIGO
+#############################################################
+
+
+# QUESTÃO 1 ---------------------------------------------------------------
+
+# taxas efetivas
+i1 <- 0.20
+i2 <- 0.12
+
+# conversão para taxa contínua
+delta1 <- log(1 + i1)
+delta2 <- log(1 + i2)
+
+# formatação
+fmt <- function(x) formatC(x * 100, format="f", digits=4, decimal.mark=",")
+
+cat("QUESTÃO 1\n\n")
+
+cat("Taxa contínua equivalente:\n")
+cat("A) 20% a.a.:", fmt(delta1), "% a.a.\n")
+cat("B) 12% a.a.:", fmt(delta2), "% a.a.\n")
+
+
+# QUESTÃO 2 ---------------------------------------------------------------
+
+# dados
+C <- 1000
+delta <- 0.15
+t <- 2
+
+# cálculo do montante
+M <- C * exp(delta * t)
+
+# formatação
+M_fmt <- formatC(M, format="f", digits=4, decimal.mark=",", big.mark=".")
+
+cat("QUESTÃO 2\n\n")
+
+cat("Montante final: R$", M_fmt, "\n")
+
+
+# QUESTÃO 3 ---------------------------------------------------------------
+
+# preços
+P <- c(10.00, 10.50, 10.00)
+
+# cálculo dos retornos mensais
+retornos <- log(P[-1] / P[-length(P)]) * 100
+
+# formatação
+retornos_fmt <- formatC(retornos, format="f", digits=3, decimal.mark=",")
+
+cat("QUESTÃO 3\n\n")
+
+cat("Jan -> Fev:", retornos_fmt[1], "\n")
+cat("Fev -> Mar:", retornos_fmt[2], "\n")
+
+
+# QUESTÃO 4 ---------------------------------------------------------------
+
+# dados
+total <- 500000
+T <- 2
+i <- 0.10
+
+# fluxo anual uniforme
+c <- total / T
+
+# converter taxa para contínua
+delta <- log(1 + i)
+
+# cálculo do valor presente
+VP <- c * (1 - exp(-delta * T)) / delta
+
+# formatação
+VP_fmt <- formatC(VP, format="f", digits=2, decimal.mark=",", big.mark=".")
+
+cat("QUESTÃO 4\n\n")
+
+cat("Valor presente do investimento: R$", VP_fmt, "\n")
+
+
+# QUESTÃO 5 ---------------------------------------------------------------
+
+# dados
+c <- 120000        # fluxo anual
+T <- 10            # anos
+i <- 0.20          # taxa discreta
+I0 <- 1000000      # investimento inicial
+
+# converter para taxa contínua
+delta <- log(1 + i)
+
+# valor presente dos fluxos
+VP <- c * (1 - exp(-delta * T)) / delta
+
+# VPL
+VPL <- VP - I0
+
+# formatação
+fmt <- function(x) formatC(x, format="f", digits=2, decimal.mark=",", big.mark=".")
+
+cat("Valor Presente dos fluxos: R$", fmt(VP), "\n")
+cat("VPL do projeto: R$", fmt(VPL), "\n")
+
+
