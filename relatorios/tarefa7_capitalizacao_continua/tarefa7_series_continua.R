@@ -68,7 +68,7 @@ c <- total / T
 delta <- log(1 + i)
 
 # cálculo do valor presente
-VP <- c * (1 - exp(-delta * T)) / delta
+VP <- total / exp(delta * T)
 
 # formatação
 VP_fmt <- formatC(VP, format="f", digits=2, decimal.mark=",", big.mark=".")
