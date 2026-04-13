@@ -1,0 +1,187 @@
+############################################################
+# DISCIPLINA: NIVELAMENTO EM MATEMÁTICA FINANCEIRA
+# Autor: Felipe Fonseca
+# Objetivo: apresentar a memória de cálculo em R
+############################################################
+
+QUESTÃO 1
+Sobre os sistemas de amortizações, podemos afirmar as seguintes
+alternativas, exceto:
+
+Resposta: O Sistema de Amortização Americano pode ocorrer com 
+ou sem pagamento de juros
+
+__________________________________________________________
+
+QUESTÃO 2
+Foi obtido um empréstimo de R$ 40.000,00 a uma taxa de 3,3% 
+a.m., em 36 prestações mensais, através do Sistema Francês.
+Determine o saldo devedor imediatamente após o pagamento da 
+16ª prestação.
+
+Prestação: R$ 1.915,08
+Saldo devedor após 16 parcelas: R$ 27.717,10 
+
+__________________________________________________________
+
+QUESTÃO 3
+Uma pessoa adquiriu um apartamento financiado por uma 
+instituição financeira, para ser pago em 10 anos, com prestações
+mensais, a partir de abril de determinado ano. O valor financiado
+foi de R$ 97.200,00 pelo Sistema Francês, empregando-se uma taxa 
+de juros efetiva de 42,576% a.a. Sabendo-se que o pagamento da 
+primeira prestação ocorreu já em maio daquele ano, calcule o 
+valor da parcela de amortização contida na 35ª prestação:
+
+Prestação: R$ 3.002,50 
+Amortização na 35ª parcela: R$ 236,31 
+
+__________________________________________________________
+
+QUESTÃO 4
+A amortização de um empréstimo de R$ 22.500,00 é efetuada 
+mensalmente através de amortizações constantes. Uma dada linha 
+de sua planilha de financiamento é apresentada a seguir: Mês (k); 
+Saldo Devedor (Sdk); Amortização (Ak=375,00); Juro (Jk); 
+Prestação (Pk= R$ 480,00). Pede-se para determinar qual o mês
+referente à linha da planilha exibida, sabendo-se que 2% a.m. 
+foi a taxa de juros praticada na operação.
+
+Mês correspondente: 47 
+
+
+__________________________________________________________
+
+QUESTÃO 5
+Uma pequena empresa obteve um empréstimo de curto prazo para 
+financiar o seu capital de giro, no valor de 12.000,00 R$. No 
+contrato, ficou firmado as seguintes condições: 1) uso da Tabela 
+Price no pagamento do empréstimo; 2) carência de 2 meses, com 
+pagamento de juros durante este prazo; 3) amortização em 5 parcelas 
+mensais, começando-se imediatamente após a carência; 4)	taxa de 
+juros nominal de 24% a.a., com capitalizações mensais; 5)	taxa 
+de abertura de crédito (TAC) de 0,4% sobre o principal, exigida 
+na liberação do empréstimo; 6)	imposto sobre operações financeiras
+(IOF) de 1% sobre o principal, descontado na liberação do empréstimo. 
+Pede-se calcular o custo efetivo do empréstimo.
+
+Custo efetivo mensal: 2,2986 % a.m.
+Custo efetivo anual: 31,3515 % a.a.
+
+
+
+#############################################################
+# CÓDIGO
+#############################################################
+
+# QUESTÃO 2 ---------------------------------------------------------------
+
+# dados
+PV <- 40000
+i <- 0.033
+n <- 36
+k <- 16
+
+# prestação
+PMT <- PV * (i / (1 - (1 + i)^(-n)))
+
+# saldo devedor após 16 parcelas
+SD <- PMT * (1 - (1 + i)^-(n - k)) / i
+
+# formatação
+PMT_fmt <- formatC(PMT, format="f", digits=2, decimal.mark=",", big.mark=".")
+SD_fmt  <- formatC(SD, format="f", digits=2, decimal.mark=",", big.mark=".")
+
+cat("QUESTÃO 2\n")
+cat("Prestação: R$", PMT_fmt, "\n")
+cat("Saldo devedor após 16 parcelas: R$", SD_fmt, "\n")
+
+
+# QUESTÃO 3 ---------------------------------------------------------------
+
+# dados
+PV <- 97200
+i_a <- 0.42576
+n <- 120
+k <- 35
+
+# converter taxa para mensal
+i <- (1 + i_a)^(1/12) - 1
+
+# prestação
+PMT <- PV * (i / (1 - (1 + i)^(-n)))
+
+# saldo devedor após 34 parcelas
+SD_34 <- PMT * (1 - (1 + i)^-(n - (k - 1))) / i
+
+# juros da 35ª parcela
+juros_35 <- SD_34 * i
+
+# amortização da 35ª parcela
+amort_35 <- PMT - juros_35
+
+# formatação
+fmt <- function(x) formatC(x, format="f", digits=2, decimal.mark=",", big.mark=".")
+
+cat("Prestação: R$", fmt(PMT), "\n")
+cat("Amortização na 35ª parcela: R$", fmt(amort_35), "\n")
+
+
+# QUESTÃO 4 ---------------------------------------------------------------
+
+PV <- 22500
+A <- 375
+P <- 480
+i <- 0.02
+
+# juros da parcela
+J <- P - A
+
+# saldo anterior
+SD <- J / i
+
+# cálculo do período
+k <- (PV - SD) / A + 1
+
+cat("Mês correspondente:", k, "\n")
+
+
+# QUESTÃO 5 ---------------------------------------------------------------
+
+# dados
+PV <- 12000
+i <- 0.02
+n <- 5
+
+# custos iniciais
+TAC <- 0.004 * PV
+IOF <- 0.01 * PV
+
+# valor líquido recebido
+VL <- PV - TAC - IOF
+
+# juros na carência
+juros_carencia <- PV * i
+
+# prestação (Price)
+PMT <- PV * (i / (1 - (1 + i)^(-n)))
+
+# fluxo de caixa
+fluxo <- c(
+  VL,
+  -juros_carencia,
+  -juros_carencia,
+  rep(-PMT, n)
+)
+
+# cálculo da TIR
+tir <- uniroot(function(x) sum(fluxo / (1 + x)^(0:(length(fluxo)-1))), c(0, 1))$root
+
+# anualizar (opcional)
+tir_anual <- (1 + tir)^12 - 1
+
+# formatação
+fmt <- function(x) formatC(x * 100, format="f", digits=4, decimal.mark=",")
+
+cat("Custo efetivo mensal:", fmt(tir), "% a.m.\n")
+cat("Custo efetivo anual:", fmt(tir_anual), "% a.a.\n")
