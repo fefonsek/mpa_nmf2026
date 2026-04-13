@@ -1,0 +1,242 @@
+############################################################
+# DISCIPLINA: NIVELAMENTO EM MATEMÁTICA FINANCEIRA
+# Autor: Felipe Fonseca
+# Objetivo: apresentar a memória de cálculo em R
+############################################################
+
+QUESTÃO 1
+Determinar a taxa de rendimento real a partir de uma taxa 
+aparente de 7% a.a. e uma inflação projetada de 3% a.a.
+
+Taxa real: 3,8835 % a.a.
+
+__________________________________________________________
+
+QUESTÃO 2
+Uma empresa comprou um imóvel, no início do ano por R$ 140.000,00, 
+e vendeu no final do ano por R$ 220.000,00. Se a inflação anual 
+foi de 40%, pede-se estimar as rentabilidades aparente e real da 
+operação
+
+Rentabilidade aparente: 57,143 % a.a.
+Rentabilidade real: 12,245 % a.a.
+
+__________________________________________________________
+
+QUESTÃO 3
+Um valor de R$ 130.000,00 foi aplicado durante 15 meses a juros 
+reais de 5% a.m. mais atualização monetária correspondente à 
+inflação do período. Considerando que no período da aplicação a 
+inflação foi de 94,30%, calcular o valor de resgate.
+
+Valor de resgate: R$ 525.116,47 
+
+__________________________________________________________
+
+QUESTÃO 4
+Um investimento de R$ 200.000,00 foi feito em um título, durante 
+5 meses, sendo que que o valor de resgate no final deste período 
+foi de R$ 230.000,00. Sabendo-se que as taxas de inflação mensais 
+foram de mês 1: 5% ; mês 2: 2,3%; mês 3: -2,5%; mês 4: 1,5% e mês 
+5: -1,0%, pede-se calcular a) a taxa de inflação média no período, 
+e b) a taxa de rentabilidade real praticada na operação.
+
+Inflação média mensal: 1,026 % a.m.
+Rentabilidade real mensal: 1,790 % a.m.
+
+__________________________________________________________
+
+QUESTÃO 5
+A quantia de R$ 81.600 foi financiada a juros de 5% a.m. e deverá 
+ser paga em quatro prestações mensais. Um imposto de 2% sobre o 
+financiamento foi pago no ato do contrato. Considerando uma variação 
+constante de 10% a.m. para a taxa de inflação, pede-se a) construir 
+a planilha de pagamentos, mostrando as prestações em valores 
+atualizados monetariamente, no arquivo que será anexado, e; 
+b) o custo efetivo real e aparente (nominal do financiamento).
+
+Mes Saldo_Anterior    Juros Amortizacao Prestacao
+1   1       81600.00 4080.000    18932.17  23012.17
+2   2       62667.83 3133.392    19878.77  23012.17
+3   3       42789.06 2139.453    20872.71  23012.17
+4   4       21916.35 1095.817    21916.35  23012.17
+  Prestacao_Atualizada  Saldo_Final
+1             25313.38 6.266783e+04
+2             27844.72 4.278906e+04
+3             30629.19 2.191635e+04
+4             33692.11 6.912160e-11
+
+Custo efetivo nominal: 5,875 % a.m.
+Custo efetivo real: -3,749 % a.m.
+
+
+
+#############################################################
+# CÓDIGO
+#############################################################
+
+# QUESTÃO 1 ---------------------------------------------------------------
+
+# dados
+i_nom <- 0.07
+infl <- 0.03
+
+# cálculo
+i_real <- (1 + i_nom) / (1 + infl) - 1
+
+# formatação
+i_real_fmt <- formatC(i_real * 100, format="f", digits=4, decimal.mark=",")
+
+cat("Taxa real:", i_real_fmt, "% a.a.\n")
+
+
+# QUESTÃO 2 ---------------------------------------------------------------
+
+# dados
+P0 <- 140000
+Pf <- 220000
+infl <- 0.40
+
+# rentabilidade aparente
+i_ap <- Pf / P0 - 1
+
+# rentabilidade real
+i_real <- (1 + i_ap) / (1 + infl) - 1
+
+# formatação
+fmt <- function(x) formatC(x * 100, format="f", digits=3, decimal.mark=",")
+
+cat("Rentabilidade aparente:", fmt(i_ap), "% a.a.\n")
+cat("Rentabilidade real:", fmt(i_real), "% a.a.\n")
+
+
+# QUESTÃO 3 ---------------------------------------------------------------
+
+# dados
+C <- 130000
+i_real <- 0.05
+n <- 15
+infl <- 0.943
+
+# cálculo
+M <- C * (1 + i_real)^n * (1 + infl)
+
+# formatação
+M_fmt <- formatC(M, format="f", digits=2, decimal.mark=",", big.mark=".")
+
+cat("Valor de resgate: R$", M_fmt, "\n")
+
+
+# QUESTÃO 4 ---------------------------------------------------------------
+
+# dados
+C <- 200000
+M <- 230000
+infl <- c(0.05, 0.023, -0.025, 0.015, -0.01)
+
+# inflação acumulada
+infl_total <- prod(1 + infl) - 1
+
+# inflação média mensal
+infl_media <- (1 + infl_total)^(1/length(infl)) - 1
+
+# rentabilidade nominal (período)
+i_nom <- M / C - 1
+
+# rentabilidade real (período)
+i_real_total <- (1 + i_nom) / (1 + infl_total) - 1
+
+# rentabilidade real mensal
+i_real_mensal <- (1 + i_real_total)^(1/length(infl)) - 1
+
+# formatação
+fmt <- function(x) formatC(x * 100, format="f", digits=3, decimal.mark=",")
+
+cat("Inflação média mensal:", fmt(infl_media), "% a.m.\n")
+cat("Rentabilidade real mensal:", fmt(i_real_mensal), "% a.m.\n")
+
+
+# QUESTÃO 5 ---------------------------------------------------------------
+
+# dados
+PV <- 81600
+i <- 0.05
+n <- 4
+infl <- 0.10
+imposto <- 0.02 * PV
+
+# valor líquido recebido
+VL <- PV - imposto
+
+# prestação (Price)
+PMT <- PV * (i / (1 - (1 + i)^(-n)))
+
+# criar estrutura
+saldo <- PV
+tabela <- data.frame(
+  Mes = 1:n,
+  Saldo_Anterior = NA,
+  Juros = NA,
+  Amortizacao = NA,
+  Prestacao = PMT,
+  Prestacao_Atualizada = NA,
+  Saldo_Final = NA
+)
+
+# loop da tabela
+for (k in 1:n) {
+  
+  juros <- saldo * i
+  amort <- PMT - juros
+  saldo_final <- saldo - amort
+  
+  # atualização pela inflação
+  prest_atual <- PMT * (1 + infl)^k
+  
+  tabela[k, 2] <- saldo
+  tabela[k, 3] <- juros
+  tabela[k, 4] <- amort
+  tabela[k, 6] <- prest_atual
+  tabela[k, 7] <- saldo_final
+  
+  saldo <- saldo_final
+}
+
+# -------------------------
+# CUSTO EFETIVO
+# -------------------------
+
+# fluxo nominal
+fluxo_nom <- c(VL, rep(-PMT, n))
+
+# TIR nominal
+tir_nom <- uniroot(function(x) sum(fluxo_nom / (1 + x)^(0:n)), c(0, 1))$root
+
+# fluxo real (deflacionado)
+fluxo_real <- c(
+  VL,
+  -PMT / (1 + infl)^1,
+  -PMT / (1 + infl)^2,
+  -PMT / (1 + infl)^3,
+  -PMT / (1 + infl)^4
+)
+
+# TIR real
+tir_real <- uniroot(function(x) sum(fluxo_real / (1 + x)^(0:n)), c(-0.5, 1))$root
+
+# -------------------------
+# FORMATAÇÃO
+# -------------------------
+fmt <- function(x) formatC(x, format="f", digits=2, decimal.mark=",", big.mark=".")
+fmt_pct <- function(x) formatC(x * 100, format="f", digits=3, decimal.mark=",")
+
+# exibir tabela
+print(tabela)
+
+cat("\nCusto efetivo nominal:", fmt_pct(tir_nom), "% a.m.\n")
+cat("Custo efetivo real:", fmt_pct(tir_real), "% a.m.\n")
+
+a <- (1 + 0.05875) / (1 + 0.10) - 1
+a
+
+
